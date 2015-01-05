@@ -13,7 +13,7 @@ public interface Translator {
         /**
          * The language in which the entry is translated
          */
-        public Language from;
+        public Language languageFrom;
 
         /**
          * The language in which the entry has languageTo be translated

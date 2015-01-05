@@ -130,8 +130,19 @@ public enum Language {
         return language;
     }
 
+    public static List<Language> all() {
+        List<Language> languageList = new ArrayList<Language>();
+        
+        Language[] possibleValues = Language.values();
+        for (int numLanguage = 0; numLanguage < possibleValues.length; numLanguage++) {
+            languageList.add(possibleValues[numLanguage]);
+            
+        }
+        return languageList;
+    }
+    
     public static List<Language> toList(Language... languages) {
-        List<Language> languageList = new ArrayList<>();
+        List<Language> languageList = new ArrayList<Language>();
 
         for (int numLanguage = 0; numLanguage < languages.length; numLanguage++) {
             languageList.add(languages[numLanguage]);

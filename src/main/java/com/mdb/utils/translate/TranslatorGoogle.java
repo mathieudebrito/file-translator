@@ -26,7 +26,7 @@ public class TranslatorGoogle implements Translator {
     @Override
     public void translate() {
         if (config == null) {
-            System.out.println("AppTranslator has not been initialized");
+            System.out.println("[ERROR] Config parameter is null");
         }
 
         // Translate all files given
@@ -34,11 +34,16 @@ public class TranslatorGoogle implements Translator {
 
             // Get the entries of the current file
             Map<String, String> entries = file.parser.readEntries(file.path);
+            System.out.println("Found "+entries.size()+" entries from " +config.languageFrom);
 
             // Translate the entries in each language set in the config
             for (Language languageTo : config.languageTo) {
+                System.out.print("Translation in " + languageTo);
+
                 Map<String, String> translation = translate(languageTo, entries);
                 file.generator.writeEntries(file.pathTranslated, languageTo, translation);
+
+                System.out.println(" : Done");
             }
         }
     }
@@ -49,16 +54,14 @@ public class TranslatorGoogle implements Translator {
 
             StringBuilder url = new StringBuilder(URL_TRANSLATE);
             url = url.append("?key=" + config.key);
-            url = url.append("&source=" + config.from.toString());
+            url = url.append("&source=" + config.languageFrom.toString());
             url = url.append("&target=" + to);
 
             for (String key : entries.keySet()) {
 
                 String value = entries.get(key);
                 url = url.append("&q=" + URLEncoder.encode(value));
-                url = url.append("&cid=" + URLEncoder.encode(value)); //does not work as intented
-
-                System.out.println(key + " = " + value);
+                url = url.append("&cid=" + URLEncoder.encode(value)); //does not work as intended
             }
 
             Request request = new Request.Builder()
@@ -78,7 +81,7 @@ public class TranslatorGoogle implements Translator {
     }
 
     public Map<String, String> parse(Map<String, String> entries, String content) {
-        Map<String, String> translations = new TreeMap<>();
+        Map<String, String> translations = new TreeMap<String, String>();
 
         Gson gson = new Gson();
         TranslationPayload payload = gson.fromJson(content, TranslationPayload.class);

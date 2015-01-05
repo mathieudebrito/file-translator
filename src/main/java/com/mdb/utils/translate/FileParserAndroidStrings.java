@@ -4,23 +4,22 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.StringWriter;
-import java.util.Map;
-import java.util.TreeMap;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.StringWriter;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class FileParserAndroidStrings implements FileParser {
 
     @Override
     public Map<String, String> readEntries(String path) {
 
-        Map<String, String> entries = new TreeMap<>();
+        Map<String, String> entries = new TreeMap<String, String>();
         try {
 
             //String fileContent = Files.read(getFilename(path));

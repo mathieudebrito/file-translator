@@ -1,15 +1,21 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.7
-version = '1.0'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 1
+version = '' + versionMajor + '.' + versionMinor + '.' + versionPatch
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-
+    
     compile 'com.google.code.gson:gson:2.3'     // Take care of JSON
     compile 'com.google.guava:guava:18.0'       // Google collections utils and more
     compile 'com.squareup.okhttp:okhttp:2.1.0'  // HTTP Client
