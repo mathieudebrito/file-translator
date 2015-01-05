@@ -4,24 +4,9 @@
 
 * [Download the jar](https://bitbucket.org/mathieuDeBrito/filetranslator/downloads)
 * Include it in your project
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Create the runnable
 
-### How do I get set up? ###
+### How do I create a specific module dedicated to translation ? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### How to I Create a runnable ###
