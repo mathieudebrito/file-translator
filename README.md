@@ -9,9 +9,13 @@
 
 ### Dedicate a specific module to translation ? ###
 
+* Right-click on the main project
+* Click on *add a new module*
+* Select *Java module*
+
 ### Add the jar into the module ###
 
-* Put the jar into the /libs folder
+* Put the jar into the */libs* folder
 * Add the following line to your build.gradle
 
 ```
