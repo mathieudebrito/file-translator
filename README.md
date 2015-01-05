@@ -4,35 +4,44 @@
 
 * [Download the jar](https://bitbucket.org/mathieuDeBrito/filetranslator/downloads)
 * Create a dedicated module
+* Add the jar into the module
 * Create the runnable
 
 ### Dedicate a specific module to translation ? ###
 
+### Add the jar into the module ###
+
+* Put the jar into the /libs folder
+
 ### Create a runnable ###
-
-### Run the translator ###
-
-public class TranslateValues {
 
 ```
 #!java
-public static final String GOOGLE_API_KEY = "AIzaSyBKLWxBb2nMr9bIb4-PRUkHH7Df8-fxmAw";
 
-public static void main(String[] args) {
+public class TranslateValues {
 
-    String root = "/Users/mathieudebrito/AndroidStudioProjects/freeparkingandroid/app/src/main/res";
+    public static final String GOOGLE_API_KEY = "YOUR-API-KEY";
 
-    Translator.Config config = new Translator.Config();
-    config.key = GOOGLE_API_KEY;
-    config.from = Language.ENGLISH;
-    config.languageTo = Language.toList(Language.FRENCH);
-    config.files = new ArrayList<>();
-    config.files.add(new FileToTranslate(root, new FileParserAndroidStrings(), new FileGeneratorAndroidStrings()));
+    public static void main(String[] args) {
 
-    Translator translator = new TranslatorGoogle();
-    translator.init(config);
+        String root = "/Users/mathieudebrito/AndroidStudioProjects/freeparkingandroid/app/src/main/res";
 
-    translator.translate();
+        Translator.Config config = new Translator.Config();
+        config.key = GOOGLE_API_KEY;
+        config.from = Language.ENGLISH;
+        config.languageTo = Language.toList(Language.FRENCH);
+        config.files = new ArrayList<>();
+        config.files.add(new FileToTranslate(root, new FileParserAndroidStrings(), new FileGeneratorAndroidStrings()));
+
+        Translator translator = new TranslatorGoogle();
+        translator.init(config);
+
+        translator.translate();
+    }
 }
 ```
-}
+
+### Run the translator ###
+
+* Right-click on the runnable java file
+* Click on Run
