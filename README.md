@@ -1,12 +1,13 @@
 # README #
 
-### Getting started ###
+## Getting started ##
 
 * [Download the jar](https://bitbucket.org/mathieuDeBrito/filetranslator/downloads)
-* Include it in your project
+* Create a dedicated module
 * Create the runnable
 
 ### How do I create a specific module dedicated to translation ? ###
 
+### How do I create a runnable ###
 
-### How to I Create a runnable ###
+### How do I run the translator ###
