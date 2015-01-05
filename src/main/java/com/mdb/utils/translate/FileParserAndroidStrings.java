@@ -16,6 +16,8 @@ import java.util.TreeMap;
 
 public class FileParserAndroidStrings implements FileParser {
 
+    public static final boolean LOG_ENABLED = true;
+
     @Override
     public Map<String, String> readEntries(String path) {
 
@@ -46,7 +48,11 @@ public class FileParserAndroidStrings implements FileParser {
                         value = entry.getChildNodes().item(0).getNodeValue();
                     }
 
-                    entries.put(key, value);
+                    if (LOG_ENABLED) {
+                        System.out.println(key + " = " + decode(value));
+                    }
+
+                    entries.put(key, decode(value));
                 }
             }
 
@@ -58,6 +64,13 @@ public class FileParserAndroidStrings implements FileParser {
         }
 
         return entries;
+    }
+
+    @Override
+    public String decode(String text) {
+        text = text.replace("\\'", "'");
+
+        return text;
     }
 
     @Override

@@ -43,7 +43,7 @@ public class TranslatorGoogle implements Translator {
                 if (languageTo.equals(config.languageFrom)) {
                     file.generator.writeEntries(file.pathTranslated, languageTo, entries);
                 } else {
-                    Map<String, String> translation = translate(languageTo, entries);
+                    Map<String, String> translation = translateViaGoogle(entries, languageTo);
                     file.generator.writeEntries(file.pathTranslated, languageTo, translation);
                 }
 
@@ -52,7 +52,7 @@ public class TranslatorGoogle implements Translator {
         }
     }
 
-    public Map<String, String> translate(Language to, Map<String, String> entries) {
+    public Map<String, String> translateViaGoogle(Map<String, String> entries, Language to) {
         try {
             OkHttpClient client = new OkHttpClient();
 
@@ -75,7 +75,7 @@ public class TranslatorGoogle implements Translator {
             Response response = client.newCall(request).execute();
             String responseBody = response.body().string();
 
-            Map<String, String> translations = parse(entries, responseBody);
+            Map<String, String> translations = parse(responseBody, entries);
 
             return translations;
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class TranslatorGoogle implements Translator {
         }
     }
 
-    public Map<String, String> parse(Map<String, String> entries, String content) {
+    public Map<String, String> parse(String content, Map<String, String> defaultEntries) {
         Map<String, String> translations = new TreeMap<String, String>();
 
         Gson gson = new Gson();
@@ -92,14 +92,10 @@ public class TranslatorGoogle implements Translator {
         if (payload != null) {
             if (payload.data != null) {
                 int numTranslation = 0;
-                for (String key : entries.keySet()) {
+                for (String key : defaultEntries.keySet()) {
                     TranslationTextPayload translation = payload.data.translations.get(numTranslation);
                     translations.put(key, HTMLEntities.unhtmlentities(translation.translatedText));
                     numTranslation++;
-                }
-
-                for (String key : entries.keySet()) {
-                    String value = entries.get(key);
                 }
 
             } else {

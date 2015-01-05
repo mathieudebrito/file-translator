@@ -13,12 +13,19 @@ public class FileGeneratorAndroidStrings implements FileGenerator {
 
         for (String key : translations.keySet()) {
             String value = translations.get(key);
-            content = content.append(Files.TAB + "<string name=\"" + key + "\">" + value + "</string>" + Files.BR);
+            content = content.append(Files.TAB + "<string name=\"" + key + "\">" + encode(value) + "</string>" + Files.BR);
         }
 
         content = content.append("</resources>");
 
         Files.write(getFilename(path, language), content.toString());
+    }
+
+    @Override
+    public String encode(String text) {
+        text = text.replace("'", "\\'");
+
+        return text;
     }
 
     @Override

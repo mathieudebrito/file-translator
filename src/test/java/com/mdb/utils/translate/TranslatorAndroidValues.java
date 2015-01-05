@@ -14,7 +14,7 @@ public class TranslatorAndroidValues {
         Translator.Config config = new Translator.Config();
         config.key = GOOGLE_API_KEY;
         config.languageFrom = Language.ENGLISH;
-        config.languageTo = Language.all();
+        config.languageTo = Language.toList(Language.FRENCH);
         config.files = new ArrayList<FileToTranslate>();
         config.files.add(new FileToTranslate(root, new FileParserAndroidStrings(), new FileGeneratorAndroidStrings()));
 
@@ -23,6 +23,6 @@ public class TranslatorAndroidValues {
 
         translator.translate();
     }
-    
-    
+
+
 }
