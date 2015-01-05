@@ -34,14 +34,18 @@ public class TranslatorGoogle implements Translator {
 
             // Get the entries of the current file
             Map<String, String> entries = file.parser.readEntries(file.path);
-            System.out.println("Found "+entries.size()+" entries from " +config.languageFrom);
+            System.out.println("Found " + entries.size() + " entries from " + config.languageFrom);
 
             // Translate the entries in each language set in the config
             for (Language languageTo : config.languageTo) {
-                System.out.print("Translation in " + languageTo);
+                System.out.print("Translation in " + languageTo.toString());
 
-                Map<String, String> translation = translate(languageTo, entries);
-                file.generator.writeEntries(file.pathTranslated, languageTo, translation);
+                if (languageTo.equals(config.languageFrom)) {
+                    file.generator.writeEntries(file.pathTranslated, languageTo, entries);
+                } else {
+                    Map<String, String> translation = translate(languageTo, entries);
+                    file.generator.writeEntries(file.pathTranslated, languageTo, translation);
+                }
 
                 System.out.println(" : Done");
             }
@@ -96,7 +100,6 @@ public class TranslatorGoogle implements Translator {
 
                 for (String key : entries.keySet()) {
                     String value = entries.get(key);
-                    System.out.println(key + " = " + value);
                 }
 
             } else {

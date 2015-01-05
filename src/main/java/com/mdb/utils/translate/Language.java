@@ -7,25 +7,25 @@ public enum Language {
     AUTO_DETECT(""),
     AFRIKAANS("af"),
     ALBANIAN("sq"),
-    AMHARIC("am"),
+    //AMHARIC("am"),
     ARABIC("ar"),
     ARMENIAN("hy"),
     AZERBAIJANI("az"),
     BASQUE("eu"),
     BELARUSIAN("be"),
     BENGALI("bn"),
-    BIHARI("bh"),
+    //BIHARI("bh"),
     BULGARIAN("bg"),
     BURMESE("my"),
     CATALAN("ca"),
-    CHEROKEE("chr"),
+    //CHEROKEE("chr"),
     CHINESE("zh"),
     CHINESE_SIMPLIFIED("zh-CN"),
     CHINESE_TRADITIONAL("zh-TW"),
     CROATIAN("hr"),
     CZECH("cs"),
     DANISH("da"),
-    DHIVEHI("dv"),
+    //DHIVEHI("dv"),
     DUTCH("nl"),
     ENGLISH("en"),
     ESPERANTO("eo"),
@@ -37,14 +37,14 @@ public enum Language {
     GEORGIAN("ka"),
     GERMAN("de"),
     GREEK("el"),
-    GUARANI("gn"),
+    //GUARANI("gn"),
     GUJARATI("gu"),
     HEBREW("iw"),
     HINDI("hi"),
     HUNGARIAN("hu"),
     ICELANDIC("is"),
     INDONESIAN("id"),
-    INUKTITUT("iu"),
+    //INUKTITUT("iu"),
     IRISH("ga"),
     ITALIAN("it"),
     JAPANESE("ja"),
@@ -52,8 +52,8 @@ public enum Language {
     KAZAKH("kk"),
     KHMER("km"),
     KOREAN("ko"),
-    KURDISH("ku"),
-    KYRGYZ("ky"),
+    //KURDISH("ku"),
+    //KYRGYZ("ky"),
     LAOTHIAN("lo"),
     LATVIAN("lv"),
     LITHUANIAN("lt"),
@@ -65,17 +65,17 @@ public enum Language {
     MONGOLIAN("mn"),
     NEPALI("ne"),
     NORWEGIAN("no"),
-    ORIYA("or"),
-    PASHTO("ps"),
+    //ORIYA("or"),
+    //PASHTO("ps"),
     PERSIAN("fa"),
     POLISH("pl"),
     PORTUGUESE("pt"),
     PUNJABI("pa"),
     ROMANIAN("ro"),
     RUSSIAN("ru"),
-    SANSKRIT("sa"),
+    //SANSKRIT("sa"),
     SERBIAN("sr"),
-    SINDHI("sd"),
+    //SINDHI("sd"),
     SINHALESE("si"),
     SLOVAK("sk"),
     SLOVENIAN("sl"),
@@ -87,12 +87,12 @@ public enum Language {
     TAGALOG("tl"),
     TELUGU("te"),
     THAI("th"),
-    TIBETAN("bo"),
+    //TIBETAN("bo"),
     TURKISH("tr"),
     UKRANIAN("uk"),
     URDU("ur"),
     UZBEK("uz"),
-    UIGHUR("ug"),
+    //UIGHUR("ug"),
     VIETNAMESE("vi"),
     WELSH("cy"),
     YIDDISH("yi");
@@ -132,15 +132,16 @@ public enum Language {
 
     public static List<Language> all() {
         List<Language> languageList = new ArrayList<Language>();
-        
+
         Language[] possibleValues = Language.values();
         for (int numLanguage = 0; numLanguage < possibleValues.length; numLanguage++) {
-            languageList.add(possibleValues[numLanguage]);
-            
+            if (!possibleValues[numLanguage].toString().isEmpty()) {
+                languageList.add(possibleValues[numLanguage]);
+            }
         }
         return languageList;
     }
-    
+
     public static List<Language> toList(Language... languages) {
         List<Language> languageList = new ArrayList<Language>();
 

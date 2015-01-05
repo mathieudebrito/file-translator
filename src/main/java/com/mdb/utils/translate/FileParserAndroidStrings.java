@@ -52,6 +52,8 @@ public class FileParserAndroidStrings implements FileParser {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            System.out.println("[ERROR] file may not be found : " + getFilename(path));
             return null;
         }
 
