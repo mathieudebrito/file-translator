@@ -12,6 +12,12 @@
 ### Add the jar into the module ###
 
 * Put the jar into the /libs folder
+* Add the following line to your build.gradle
+
+```
+#!gradle
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+```
 
 ### Create a runnable ###
 
