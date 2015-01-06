@@ -1,5 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        // https://github.com/bmuschko/gradle-nexus-plugin
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.2'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'com.bmuschko.nexus'
 
 sourceCompatibility = 1.7
 
@@ -10,7 +22,7 @@ repositories {
 
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 1
+def versionPatch = 3
 version = '' + versionMajor + '.' + versionMinor + '.' + versionPatch
 
 dependencies {
@@ -20,3 +32,47 @@ dependencies {
     compile 'com.google.guava:guava:18.0'       // Google collections utils and more
     compile 'com.squareup.okhttp:okhttp:2.1.0'  // HTTP Client
 }
+
+
+modifyPom {
+    project {
+        name 'File translator'
+        description 'Library that helps translating files'
+        url 'https://github.com/mathieudebrito/file-translator'
+        inceptionYear '2013'
+
+        scm {
+            url 'https://github.com/mathieudebrito/file-translator'
+            connection 'scm:https://github.com/mathieudebrito/file-translator.git'
+            developerConnection 'scm:git://github.com/mathieudebrito/file-translator.git'
+        }
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'mathieudebrito'
+                name 'Mathieu de Brito'
+                email 'mathieu.debrito@gmail.com'
+            }
+        }
+    }
+}
+
+extraArchive {
+    sources = false
+    tests = true
+    javadoc = false
+}
+      /*
+nexus {
+    sign = true
+    repositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal/'
+    snapshotRepositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal-snapshots/'
+}                    */
