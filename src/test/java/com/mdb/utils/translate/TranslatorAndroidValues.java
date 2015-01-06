@@ -1,5 +1,8 @@
 package com.mdb.utils.translate;
 
+import com.mdb.utils.translate.generators.android.ResourcesStringsFileGenerator;
+import com.mdb.utils.translate.parsers.android.ResourcesStringsFileParser;
+
 import java.util.ArrayList;
 
 public class TranslatorAndroidValues {
@@ -16,7 +19,7 @@ public class TranslatorAndroidValues {
         config.languageFrom = Language.ENGLISH;
         config.languageTo = Language.toList(Language.FRENCH);
         config.files = new ArrayList<FileToTranslate>();
-        config.files.add(new FileToTranslate(root, new FileParserAndroidStrings(), new FileGeneratorAndroidStrings()));
+        config.files.add(new FileToTranslate(root, new ResourcesStringsFileParser(), new ResourcesStringsFileGenerator()));
 
         Translator translator = new TranslatorGoogle();
         translator.init(config);
