@@ -1,5 +1,7 @@
-package com.mdb.utils.translate;
+package com.mdb.utils.translate.parsers.android;
 
+import com.mdb.utils.translate.Language;
+import com.mdb.utils.translate.parsers.FileParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -14,21 +16,21 @@ import java.io.StringWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class FileParserAndroidStrings implements FileParser {
+public class ResourcesStringsFileParser implements FileParser {
 
     public static final boolean LOG_ENABLED = true;
 
     @Override
-    public Map<String, String> readEntries(String path) {
+    public Map<String, String> readEntries(String path, Language languageFrom) {
 
         Map<String, String> entries = new TreeMap<String, String>();
         try {
 
-            //String fileContent = Files.read(getFilename(path));
+            //String fileContent = Files.read(getFileNames(path));
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(getFilename(path));
+            Document doc = db.parse(getFilename(path, languageFrom));
             doc.getDocumentElement().normalize();
 
             NodeList strings = doc.getElementsByTagName("string");
@@ -52,14 +54,14 @@ public class FileParserAndroidStrings implements FileParser {
                         System.out.println(key + " = " + decode(value));
                     }
 
-                    entries.put(key, decode(value));
+                    entries.put(key, value);
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
 
-            System.out.println("[ERROR] file may not be found : " + getFilename(path));
+            System.out.println("[ERROR] file may not be found : " + getFilename(path, languageFrom));
             return null;
         }
 
@@ -74,7 +76,7 @@ public class FileParserAndroidStrings implements FileParser {
     }
 
     @Override
-    public String getFilename(String path) {
+    public String getFilename(String path, Language language) {
         return path + "/values/strings.xml";
     }
 }

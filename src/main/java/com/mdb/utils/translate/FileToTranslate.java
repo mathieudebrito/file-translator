@@ -1,5 +1,8 @@
 package com.mdb.utils.translate;
 
+import com.mdb.utils.translate.generators.FileGenerator;
+import com.mdb.utils.translate.parsers.FileParser;
+
 public class FileToTranslate {
 
     /**

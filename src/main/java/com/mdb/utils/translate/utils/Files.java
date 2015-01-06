@@ -1,11 +1,7 @@
-package com.mdb.utils.translate;
+package com.mdb.utils.translate.utils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 public class Files {
 
@@ -42,6 +38,11 @@ public class Files {
         return sb.toString();
     }
 
+    public static void write(List<String> fileNames, String content) {
+        for (String fileName : fileNames) {
+            write(fileName, content);
+        }
+    }
 
     public static void write(String fileName, String content) {
         BufferedWriter bw = null;

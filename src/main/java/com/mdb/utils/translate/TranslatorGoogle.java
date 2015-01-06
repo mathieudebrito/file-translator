@@ -33,19 +33,32 @@ public class TranslatorGoogle implements Translator {
         for (FileToTranslate file : config.files) {
 
             // Get the entries of the current file
-            Map<String, String> entries = file.parser.readEntries(file.path);
+            Map<String, String> entries = file.parser.readEntries(file.path, config.languageFrom);
+
+            // Decode all values
+            for (String key : entries.keySet()) {
+                String value = entries.get(key);
+                entries.put(key, file.parser.decode(value));
+            }
+
             System.out.println("Found " + entries.size() + " entries from " + config.languageFrom);
 
             // Translate the entries in each language set in the config
             for (Language languageTo : config.languageTo) {
                 System.out.print("Translation in " + languageTo.toString());
 
-                if (languageTo.equals(config.languageFrom)) {
-                    file.generator.writeEntries(file.pathTranslated, languageTo, entries);
-                } else {
-                    Map<String, String> translation = translateViaGoogle(entries, languageTo);
-                    file.generator.writeEntries(file.pathTranslated, languageTo, translation);
+                Map<String, String> translations = entries;
+                if (!languageTo.equals(config.languageFrom)) {
+                    translations = translateViaGoogle(entries, languageTo);
                 }
+
+                // Encode all values
+                for (String key : entries.keySet()) {
+                    String value = translations.get(key);
+                    translations.put(key, file.generator.encode(value));
+                }
+
+                file.generator.writeEntries(file.pathTranslated, languageTo, translations);
 
                 System.out.println(" : Done");
             }
@@ -94,7 +107,7 @@ public class TranslatorGoogle implements Translator {
                 int numTranslation = 0;
                 for (String key : defaultEntries.keySet()) {
                     TranslationTextPayload translation = payload.data.translations.get(numTranslation);
-                    translations.put(key, HTMLEntities.unhtmlentities(translation.translatedText));
+                    translations.put(key, HTMLEntities.unhtmlentities(translation.translatedText).trim());
                     numTranslation++;
                 }
 

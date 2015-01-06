@@ -1,8 +1,14 @@
-package com.mdb.utils.translate;
+package com.mdb.utils.translate.generators.android;
 
+import com.mdb.utils.translate.Language;
+import com.mdb.utils.translate.generators.FileGenerator;
+import com.mdb.utils.translate.utils.Files;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class FileGeneratorAndroidStrings implements FileGenerator {
+public class ResourcesStringsFileGenerator implements FileGenerator {
 
     @Override
     public void writeEntries(String path, Language language, Map<String, String> translations) {
@@ -18,7 +24,7 @@ public class FileGeneratorAndroidStrings implements FileGenerator {
 
         content = content.append("</resources>");
 
-        Files.write(getFilename(path, language), content.toString());
+        Files.write(getFileNames(path, language), content.toString());
     }
 
     @Override
@@ -29,8 +35,10 @@ public class FileGeneratorAndroidStrings implements FileGenerator {
     }
 
     @Override
-    public String getFilename(String path, Language language) {
+    public List<String> getFileNames(String path, Language language) {
 
+        List<String> fileNames = new ArrayList<String>();
+        
         String fileName = path + "/values-";
         if (language.toString().equalsIgnoreCase(Language.CHINESE_SIMPLIFIED.toString())) {
             fileName = fileName.concat("zh-rCN");
@@ -41,7 +49,8 @@ public class FileGeneratorAndroidStrings implements FileGenerator {
         }
 
         fileName = fileName.concat("/strings.xml");
+        fileNames.add(fileName);
 
-        return fileName;
+        return fileNames;
     }
 }

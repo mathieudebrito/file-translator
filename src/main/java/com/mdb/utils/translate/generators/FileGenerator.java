@@ -1,5 +1,8 @@
-package com.mdb.utils.translate;
+package com.mdb.utils.translate.generators;
 
+import com.mdb.utils.translate.Language;
+
+import java.util.List;
 import java.util.Map;
 
 public interface FileGenerator {
@@ -7,5 +10,5 @@ public interface FileGenerator {
 
     public String encode(String text);
 
-    public String getFilename(String path, Language languageTo);
+    public List<String> getFileNames(String path, Language languageTo);
 }
