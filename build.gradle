@@ -22,8 +22,10 @@ repositories {
 
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 3
+def versionPatch = 4
 version = '' + versionMajor + '.' + versionMinor + '.' + versionPatch
+
+group = 'com.github.mathieudebrito'
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
@@ -70,9 +72,7 @@ extraArchive {
     tests = true
     javadoc = false
 }
-      /*
+
 nexus {
-    sign = true
-    repositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal/'
-    snapshotRepositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal-snapshots/'
-}                    */
+    sign = false
+}
