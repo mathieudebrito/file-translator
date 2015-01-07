@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class TranslatorAndroidPlayStoreListing {
 
-    public static final String GOOGLE_API_KEY = "";
+    public static final String GOOGLE_API_KEY = "AIzaSyBKLWxBb2nMr9bIb4-PRUkHH7Df8-fxmAw";
 
     @org.junit.Test
     public void testWhatsNew() throws Exception {
@@ -23,7 +23,7 @@ public class TranslatorAndroidPlayStoreListing {
         Translator.Config config = new Translator.Config();
         config.key = GOOGLE_API_KEY;
         config.languageFrom = Language.ENGLISH;
-        config.languageTo = Language.toList(Language.FRENCH);
+        config.languageTo = Language.all();
         config.files = new ArrayList<FileToTranslate>();
         config.files.add(new FileToTranslate(root, new WhatsNewFileParser(), new WhatsNewFileGenerator()));
         config.files.add(new FileToTranslate(root, new FullDescriptionFileParser(), new FullDescriptionFileGenerator()));
