@@ -18,23 +18,20 @@
 * Put the jar into the */libs* folder
 * Add the following line to your build.gradle
 
-```
-#!gradle
+```gradle
     compile fileTree(dir: 'libs', include: ['*.jar'])
 ```
 
 ### Create a runnable ###
 
-```
-#!java
-
+```java
 public class TranslateValues {
 
     public static final String GOOGLE_API_KEY = "YOUR-API-KEY";
 
     public static void main(String[] args) {
 
-        String root = "/Users/mathieudebrito/AndroidStudioProjects/freeparkingandroid/app/src/main/res";
+        String root = "/path-to-your-app/app/src/main/res";
 
         Translator.Config config = new Translator.Config();
         config.key = GOOGLE_API_KEY;
