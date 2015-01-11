@@ -1,6 +1,8 @@
 # README #
 
-## Getting started ##
+File-Translator helps you translate your Android app using Google Translate.
+
+### Getting started ###
 
 * [Download the jar](https://bitbucket.org/mathieuDeBrito/filetranslator/downloads)
 * Create a dedicated module
@@ -13,10 +15,19 @@
 * Click on *add a new module*
 * Select *Java module*
 
-### Add the jar into the module ###
+### Download ###
+
+##### Using gradle #####
+
+Add this line to your module dependencies
+```gradle
+    compile 'com.github.mathieudebrito:file-translator:1.0.+'
+```
+
+##### Using the .jar #####
 
 * Put the jar into the */libs* folder
-* Add the following line to your build.gradle
+* Add this line to your module dependencies
 
 ```gradle
     compile fileTree(dir: 'libs', include: ['*.jar'])
