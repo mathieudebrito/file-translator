@@ -151,4 +151,51 @@ public enum Language {
 
         return languageList;
     }
+    
+    public static List<Language> getGooglePlayCompliantLanguages() {
+        List<Language> languageList = new ArrayList<Language>();
+
+        languageList.add(Language.AFRIKAANS);
+        languageList.add(Language.GERMAN);
+        languageList.add(Language.ENGLISH);
+        languageList.add(Language.BELARUSIAN);
+        languageList.add(Language.BULGARIAN);
+        languageList.add(Language.CATALAN);
+        languageList.add(Language.CHINESE_SIMPLIFIED);
+        languageList.add(Language.CHINESE_TRADITIONAL);
+        languageList.add(Language.KOREAN);
+        languageList.add(Language.CROATIAN);
+        languageList.add(Language.DANISH);
+        languageList.add(Language.SPANISH);
+        languageList.add(Language.ESTONIAN);
+        languageList.add(Language.FILIPINO);
+        languageList.add(Language.FINNISH);
+        languageList.add(Language.FRENCH);
+        languageList.add(Language.GREEK);
+        languageList.add(Language.HEBREW);
+        languageList.add(Language.HINDI);
+        languageList.add(Language.HUNGARIAN);
+        languageList.add(Language.INDONESIAN);
+        languageList.add(Language.ITALIAN);
+        languageList.add(Language.JAPANESE);
+        languageList.add(Language.LITHUANIAN);
+        languageList.add(Language.MALAY);
+        languageList.add(Language.NORWEGIAN);
+        languageList.add(Language.PERSIAN);
+        languageList.add(Language.POLISH);
+        languageList.add(Language.PORTUGUESE);
+        languageList.add(Language.ROMANIAN);
+        languageList.add(Language.SERBIAN);
+        languageList.add(Language.SLOVAK);
+        languageList.add(Language.SLOVENIAN);
+        languageList.add(Language.SWEDISH);
+        languageList.add(Language.SWAHILI);
+        languageList.add(Language.CZECH);
+        languageList.add(Language.THAI);
+        languageList.add(Language.TURKISH);
+        languageList.add(Language.UKRANIAN);
+        languageList.add(Language.VIETNAMESE);
+
+        return languageList;
+    }
 }
