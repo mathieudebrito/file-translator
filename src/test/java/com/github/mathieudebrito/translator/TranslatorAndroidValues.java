@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TranslatorAndroidValues {
 
-    public static final String GOOGLE_API_KEY = "AIzaSyBKLWxBb2nMr9bIb4-PRUkHH7Df8-fxmAw";
+    public static final String GOOGLE_API_KEY = "";
 
     @org.junit.Test
     public void testInit() throws Exception {
