@@ -19,7 +19,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
 
         for (String key : translations.keySet()) {
             String value = translations.get(key);
-            content = content.append(Files.TAB + "<string name=\"" + key + "\">" + encode(value) + "</string>" + Files.BR);
+            content = content.append(Files.TAB + "<string name=\"" + key + "\">" + value + "</string>" + Files.BR);
         }
 
         content = content.append("</resources>");
@@ -29,7 +29,10 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
 
     @Override
     public String encode(String text) {
-        text = text.replace("'", "\\'");
+
+        if (text.contains("'") || text.contains("\"")) {
+            text = "<![CDATA[" + text.trim() + "]]>";
+        }
 
         return text;
     }
@@ -38,7 +41,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
     public List<String> getFileNames(String path, Language language) {
 
         List<String> fileNames = new ArrayList<String>();
-        
+
         String fileName = path + "/values-";
         if (language.toString().equalsIgnoreCase(Language.CHINESE_SIMPLIFIED.toString())) {
             fileName = fileName.concat("zh-rCN");

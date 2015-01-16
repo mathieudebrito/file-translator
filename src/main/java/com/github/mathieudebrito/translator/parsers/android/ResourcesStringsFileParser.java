@@ -70,9 +70,13 @@ public class ResourcesStringsFileParser implements FileParser {
 
     @Override
     public String decode(String text) {
+        
+        
         text = text.replace("\\'", "'");
+        text = text.replace("]]>", "");
+        text = text.replace("<![CDATA[", "");
 
-        return text;
+        return text.trim();
     }
 
     @Override

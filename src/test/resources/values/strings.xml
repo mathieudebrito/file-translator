@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="test_1">Hello</string>
-    <string name="test_2">Hello translator</string>
-    <string name="test_3">I\'d like to say hello</string>
+    <string name="test_2">Hello the learning</string>
+    <string name="test_3"><![CDATA[I\'d like to say hello]]></string>
 </resources>

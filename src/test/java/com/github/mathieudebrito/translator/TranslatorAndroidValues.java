@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TranslatorAndroidValues {
 
-    public static final String GOOGLE_API_KEY = "";
+    public static final String GOOGLE_API_KEY = "AIzaSyBKLWxBb2nMr9bIb4-PRUkHH7Df8-fxmAw";
 
     @org.junit.Test
     public void testInit() throws Exception {
@@ -17,7 +17,7 @@ public class TranslatorAndroidValues {
         Translator.Config config = new Translator.Config();
         config.key = GOOGLE_API_KEY;
         config.languageFrom = Language.ENGLISH;
-        config.languageTo = Language.toList(Language.FRENCH);
+        config.languageTo = Language.toList( Language.FRENCH);
         config.files = new ArrayList<FileToTranslate>();
         config.files.add(new FileToTranslate(root, new ResourcesStringsFileParser(), new ResourcesStringsFileGenerator()));
 
