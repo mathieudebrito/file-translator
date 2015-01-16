@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class ResourcesStringsFileGenerator implements FileGenerator {
 
+    public static String[] specialCharacters = new String[]{"'", "\"", "<", ">"};
+
     @Override
     public void writeEntries(String path, Language language, Map<String, String> translations) {
 
@@ -30,7 +32,15 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
     @Override
     public String encode(String text) {
 
-        if (text.contains("'") || text.contains("\"")) {
+        boolean contains = false;
+        for (String specialCharacter : specialCharacters) {
+            if (text.contains(specialCharacter) ) {
+                contains = true;
+                break;
+            }
+        }
+
+        if (contains) {
             text = "<![CDATA[" + text.trim() + "]]>";
         }
 

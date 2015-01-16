@@ -2,5 +2,5 @@
 <resources>
 	<string name="test_1">Bonjour</string>
 	<string name="test_2"><![CDATA[Bonjour l'apprentissage]]></string>
-	<string name="test_3">Je aimerais dire bonjour</string>
+	<string name="test_3"><![CDATA[Je aimerais dire <5 km]]></string>
 </resources>

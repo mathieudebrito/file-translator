@@ -107,7 +107,12 @@ public class TranslatorGoogle implements Translator {
                 int numTranslation = 0;
                 for (String key : defaultEntries.keySet()) {
                     TranslationTextPayload translation = payload.data.translations.get(numTranslation);
-                    translations.put(key, HTMLEntities.unhtmlentities(translation.translatedText).trim());
+                    
+                    String translatedText = translation.translatedText;
+                    translatedText = HTMLEntities.unhtmlentities(translatedText).trim();
+                    translatedText = HTMLEntities.unhtmlAngleBrackets(translatedText);
+
+                    translations.put(key, translatedText);
                     numTranslation++;
                 }
 
