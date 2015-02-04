@@ -151,7 +151,7 @@ public enum Language {
 
         return languageList;
     }
-    
+
     public static List<Language> getGooglePlayCompliantLanguages() {
         List<Language> languageList = new ArrayList<Language>();
 
@@ -198,4 +198,33 @@ public enum Language {
 
         return languageList;
     }
+
+    public static List<Language> getAppleStoreCompliantLanguages() {
+        List<Language> languageList = new ArrayList<Language>();
+
+        languageList.add(Language.ENGLISH);     // US + Australian + canada
+        languageList.add(Language.CHINESE_SIMPLIFIED);
+        languageList.add(Language.CHINESE_TRADITIONAL);
+        languageList.add(Language.DANISH);
+        languageList.add(Language.DUTCH);
+        languageList.add(Language.FRENCH);      // traditional + canadian
+        languageList.add(Language.GERMAN);
+        languageList.add(Language.GREEK);
+        languageList.add(Language.INDONESIAN);
+        languageList.add(Language.ITALIAN);
+        languageList.add(Language.JAPANESE);
+        languageList.add(Language.KOREAN);
+        languageList.add(Language.MALAY);
+        languageList.add(Language.NORWEGIAN);
+        languageList.add(Language.PORTUGUESE);  // traditional + brazilian
+        languageList.add(Language.RUSSIAN);
+        languageList.add(Language.SPANISH);     // traditional + mexican
+        languageList.add(Language.SWEDISH);
+        languageList.add(Language.THAI);
+        languageList.add(Language.TURKISH);
+        languageList.add(Language.VIETNAMESE);
+
+        return languageList;
+    }
+
 }
