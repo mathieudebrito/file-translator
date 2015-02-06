@@ -14,6 +14,7 @@ public class ShortDescriptionFileGenerator extends PlainTextFileGenerator {
         text = text.replace(" <br> ", "\n");
         text = text.replace("<br> ", "\n");
         text = text.replace(" <br>", "\n");
+        text = text.replace("<br />", "\n");
         return text;
     }
 
