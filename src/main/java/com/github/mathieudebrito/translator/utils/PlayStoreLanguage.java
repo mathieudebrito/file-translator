@@ -99,7 +99,7 @@ public class PlayStoreLanguage {
         } else if (language == Language.RUSSIAN) {
             addDuo(languages, language);
         } else if (language == Language.ROMANIAN) {
-            addDuo(languages, language);
+            addSingle(languages, language);
         } else if (language == Language.SERBIAN) {
             addSingle(languages, language);
         } else if (language == Language.SLOVAK) {
