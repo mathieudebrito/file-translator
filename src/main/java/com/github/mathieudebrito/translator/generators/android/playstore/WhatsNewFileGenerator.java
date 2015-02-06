@@ -11,9 +11,9 @@ public class WhatsNewFileGenerator extends PlainTextFileGenerator {
 
     @Override
     public String encode(String text) {
-        text = text.replace(" <br> ", "\n");
-        text = text.replace("<br> ", "\n");
-        text = text.replace(" <br>", "\n");
+        text = text.replace(" <br /> ", "\n");
+        text = text.replace("<br /> ", "\n");
+        text = text.replace(" <br />", "\n");
         text = text.replace("<br />", "\n");
         return text;
     }
