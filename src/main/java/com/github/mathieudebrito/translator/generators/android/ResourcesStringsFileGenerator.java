@@ -43,6 +43,10 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
         if (contains) {
             text = "<![CDATA[" + text.trim() + "]]>";
         }
+        
+        if(text.contains("'")){
+            text = text.replace("'", "\\'");
+        }
 
         return text;
     }
