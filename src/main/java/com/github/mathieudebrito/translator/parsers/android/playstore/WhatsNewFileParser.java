@@ -8,7 +8,8 @@ public class WhatsNewFileParser extends PlainTextFileParser {
 
     @Override
     public String decode(String text) {
-        text = text.replace("\n", "<br>");
+        text = text.replace("\n", "<br />");
+        text = text.replace("<br>", "<br />");
         return text;
     }
 

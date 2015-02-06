@@ -34,14 +34,15 @@ public class TranslatorGoogle implements Translator {
 
             // Get the entries of the current file
             Map<String, String> entries = file.parser.readEntries(file.path, config.languageFrom);
+            Map<String, String> entriesDecoded = file.parser.readEntries(file.path, config.languageFrom);
 
             // Decode all values
-            for (String key : entries.keySet()) {
-                String value = entries.get(key);
-                entries.put(key, file.parser.decode(value));
+            for (String key : entriesDecoded.keySet()) {
+                String value = entriesDecoded.get(key);
+                entriesDecoded.put(key, file.parser.decode(value));
             }
 
-            System.out.println("Found " + entries.size() + " entries from " + config.languageFrom);
+            System.out.println("Found " + entriesDecoded.size() + " entries from " + config.languageFrom);
 
             // Translate the entries in each language set in the config
             for (Language languageTo : config.languageTo) {
@@ -49,7 +50,7 @@ public class TranslatorGoogle implements Translator {
 
                 Map<String, String> translations = entries;
                 if (!languageTo.equals(config.languageFrom)) {
-                    translations = translateViaGoogle(entries, languageTo);
+                    translations = translateViaGoogle(entriesDecoded, languageTo);
                 }
 
                 // Encode all values
@@ -107,7 +108,7 @@ public class TranslatorGoogle implements Translator {
                 int numTranslation = 0;
                 for (String key : defaultEntries.keySet()) {
                     TranslationTextPayload translation = payload.data.translations.get(numTranslation);
-                    
+
                     String translatedText = translation.translatedText;
                     translatedText = HTMLEntities.unhtmlentities(translatedText).trim();
                     translatedText = HTMLEntities.unhtmlAngleBrackets(translatedText);

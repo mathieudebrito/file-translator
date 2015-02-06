@@ -11,10 +11,9 @@ public class FullDescriptionFileGenerator extends PlainTextFileGenerator {
 
     @Override
     public String encode(String text) {
-        text = text.replace("\n", "<br />\n");
-        text = text.replace(" <br /> ", "<br />\n");
-        text = text.replace("<br /> ", "<br />\n");
-        text = text.replace(" <br />", "<br />\n");
+        text = text.replace(" <br /> ", "\n");
+        text = text.replace("<br /> ", "\n");
+        text = text.replace(" <br />", "\n");
         return text;
     }
 
