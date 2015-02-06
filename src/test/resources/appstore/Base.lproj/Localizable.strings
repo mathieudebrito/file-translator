@@ -1,7 +1,16 @@
 "INTERNET_NOT_AVAILABLE" = "Internet seems to be not available";
 "TOO_FAR" = "Too far to load parkings";
+
 "DISCOVER_APP" = "Discover";
 "SHARE_APP" = "Share the app";
+/* This is a comment
+*
+*
+ *
+*/
+
+
+// Here too
 "REPORT_MISSING_PARK" = "To report a missing parking, long press on the map at the specific location.";
 "REPORT_HAS_SUBMITED" = "Your report has been sent, thank you !";
 "APPLICATION_NOT_AVAILABLE" = "You need a navigation app installed";

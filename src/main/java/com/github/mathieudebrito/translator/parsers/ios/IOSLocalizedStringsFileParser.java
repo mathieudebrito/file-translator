@@ -29,8 +29,14 @@ public class IOSLocalizedStringsFileParser implements FileParser {
                 br = new BufferedReader(new FileReader(file));
                 String line = br.readLine();
                 while (line != null) {
+                    line = line.trim();
 
-                    if (!Strings.isNullOrEmpty(line.trim())) {
+                    boolean isEmpty = Strings.isNullOrEmpty(line);
+                    boolean beginWithQuote = line.startsWith("\"");
+                    boolean containsEqual = line.contains("=");
+                    boolean endsWithSemiColon = line.endsWith(";");
+
+                    if (!isEmpty && beginWithQuote && containsEqual && endsWithSemiColon) {
                         String[] keyValue = line.trim().replace("\"", "").replace(";", "").split("=");
 
                         String key = keyValue[0].trim();
@@ -38,9 +44,10 @@ public class IOSLocalizedStringsFileParser implements FileParser {
 
                         System.out.println(key + " = " + value);
                         entries.put(key, value);
-
-                        line = br.readLine();
+                    } else {
+                        System.out.println("[SKIPPED] line : '" + line + "'");
                     }
+                    line = br.readLine();
                 }
 
             } catch (Exception e) {
