@@ -36,18 +36,23 @@ public class IOSLocalizedStringsFileGenerator implements FileGenerator {
 
         List<String> fileNames = new ArrayList<String>();
 
-        String fileName = path + "/";
+        String fileNamePrefix = path + "/";
+        String fileNameSuffix = ".lproj/Localizable.strings";
         if (language.toString().equalsIgnoreCase(Language.CHINESE_SIMPLIFIED.toString())) {
-            fileName = fileName.concat("zh-rCN");
+            fileNames.add(fileNamePrefix + "zh-Hans" + fileNameSuffix);
         } else if (language.toString().equalsIgnoreCase(Language.CHINESE_TRADITIONAL.toString())) {
-            fileName = fileName.concat("zh-rTW");
+            fileNames.add(fileNamePrefix + "zh-Hant" + fileNameSuffix);
+        } else if (language.toString().equalsIgnoreCase(Language.NORWEGIAN.toString())) {
+            fileNames.add(fileNamePrefix + "nb" + fileNameSuffix);
+        } else if (language.toString().equalsIgnoreCase(Language.PORTUGUESE.toString())) {
+            fileNames.add(fileNamePrefix + "pt" + fileNameSuffix);
+            fileNames.add(fileNamePrefix + "pt-PT" + fileNameSuffix);
+        } else if (language.toString().equalsIgnoreCase(Language.SPANISH.toString())) {
+            fileNames.add(fileNamePrefix + "es" + fileNameSuffix);
+            fileNames.add(fileNamePrefix + "es-MX" + fileNameSuffix);
         } else {
-            fileName = fileName.concat(language.toString());
+            fileNames.add(fileNamePrefix + language.toString() + fileNameSuffix);
         }
-
-        fileName = fileName.concat(".lproj/Localizable.strings");
-
-        fileNames.add(fileName);
 
         return fileNames;
     }
