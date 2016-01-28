@@ -55,7 +55,7 @@ public class FileToTranslate {
             fileToTranslate = new FileToTranslate();
         }
 
-        protected FileToTranslate.Builder path(String path) {
+        public FileToTranslate.Builder path(String path) {
             fileToTranslate.pathFrom = path;
             if (Strings.isNullOrEmpty(fileToTranslate.pathTo)) {
                 fileToTranslate.pathTo = path;
@@ -63,52 +63,52 @@ public class FileToTranslate {
             return this;
         }
 
-        protected FileToTranslate.Builder pathTranslated(String pathTranslated) {
+        public FileToTranslate.Builder pathTranslated(String pathTranslated) {
             fileToTranslate.pathTo = pathTranslated;
             return this;
         }
 
-        protected FileToTranslate.Builder from(String fileNameFrom) {
+        public FileToTranslate.Builder from(String fileNameFrom) {
             fileToTranslate.fileNamesFrom = Arrays.asList(fileNameFrom);
             return this;
         }
 
-        protected FileToTranslate.Builder from(String... fileNamesFrom) {
+        public FileToTranslate.Builder from(String... fileNamesFrom) {
             fileToTranslate.fileNamesFrom = Arrays.asList(fileNamesFrom);
             return this;
         }
 
-        protected FileToTranslate.Builder from(List<String> fileNamesFrom) {
+        public FileToTranslate.Builder from(List<String> fileNamesFrom) {
             fileToTranslate.fileNamesFrom = fileNamesFrom;
             return this;
         }
 
-        protected FileToTranslate.Builder fileNameOfEntriesToExclude(String fileNameOfEntriesToExclude) {
+        public FileToTranslate.Builder fileNameOfEntriesToExclude(String fileNameOfEntriesToExclude) {
             fileToTranslate.fileNameOfEntriesToExclude = Arrays.asList(fileNameOfEntriesToExclude);
             return this;
         }
 
-        protected FileToTranslate.Builder fileNameOfEntriesToExclude(String... fileNameOfEntriesToExclude) {
+        public FileToTranslate.Builder fileNameOfEntriesToExclude(String... fileNameOfEntriesToExclude) {
             fileToTranslate.fileNameOfEntriesToExclude = Arrays.asList(fileNameOfEntriesToExclude);
             return this;
         }
 
-        protected FileToTranslate.Builder fileNameOfEntriesToExclude(List<String> fileNameOfEntriesToExclude) {
+        public FileToTranslate.Builder fileNameOfEntriesToExclude(List<String> fileNameOfEntriesToExclude) {
             fileToTranslate.fileNameOfEntriesToExclude = fileNameOfEntriesToExclude;
             return this;
         }
 
-        protected FileToTranslate.Builder to(String fileNameTo) {
+        public FileToTranslate.Builder to(String fileNameTo) {
             fileToTranslate.fileNameTo = fileNameTo;
             return this;
         }
 
-        protected FileToTranslate.Builder parser(FileParser parser) {
+        public FileToTranslate.Builder parser(FileParser parser) {
             fileToTranslate.parser = parser;
             return this;
         }
 
-        protected FileToTranslate.Builder generator(FileGenerator generator) {
+        public FileToTranslate.Builder generator(FileGenerator generator) {
             fileToTranslate.generator = generator;
             return this;
         }
