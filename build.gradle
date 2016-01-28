@@ -22,7 +22,7 @@ repositories {
 
 def versionMajor = 2
 def versionMinor = 0
-def versionPatch = 1
+def versionPatch = 2
 version = '' + versionMajor + '.' + versionMinor + '.' + versionPatch
 
 group = 'com.github.mathieudebrito'

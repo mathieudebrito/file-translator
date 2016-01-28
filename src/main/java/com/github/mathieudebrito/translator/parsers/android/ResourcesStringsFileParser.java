@@ -61,8 +61,8 @@ public class ResourcesStringsFileParser implements FileParser {
         } catch (Exception e) {
             e.printStackTrace();
 
-            System.out.println("[ERROR] file may not be found : " + getFilename(path, fileNameFrom, languageFrom));
-            return null;
+            System.out.println("[WARNING] file may not be found : " + getFilename(path, fileNameFrom, languageFrom));
+            return new TreeMap<String, String>();
         }
 
         return entries;
