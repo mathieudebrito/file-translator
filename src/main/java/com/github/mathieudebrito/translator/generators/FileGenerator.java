@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface FileGenerator {
-    public void writeEntries(String pathTranslated, Language languageTo, Map<String, String> translation);
+    void writeEntries(String pathTranslated, String fileName, Language languageTo, Map<String, String> translation);
 
-    public String encode(String text);
+    String encode(String text);
 
-    public List<String> getFileNames(String path, Language languageTo);
+    List<String> getFileNames(String path, String fileName, Language languageTo);
 }

@@ -2,12 +2,13 @@ package com.github.mathieudebrito.translator.parsers;
 
 import com.github.mathieudebrito.translator.Language;
 
+import java.util.List;
 import java.util.Map;
 
 public interface FileParser {
-    public Map<String, String> readEntries(String path, Language language);
+    Map<String, String> readEntries(String path, List<String> fileName, Language language);
 
-    public String decode(String text);
+    String decode(String text);
 
-    public String getFilename(String path, Language language);
+    String getFilename(String path, String fileName, Language language);
 }

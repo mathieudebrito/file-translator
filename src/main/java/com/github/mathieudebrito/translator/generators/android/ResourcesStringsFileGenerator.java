@@ -13,7 +13,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
     public static String[] specialCharacters = new String[]{"'", "\"", "<", ">"};
 
     @Override
-    public void writeEntries(String path, Language language, Map<String, String> translations) {
+    public void writeEntries(String pathTo, String fileNameTo, Language language, Map<String, String> translations) {
 
         StringBuilder content = new StringBuilder();
         content = content.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + Files.BR);
@@ -26,7 +26,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
 
         content = content.append("</resources>");
 
-        Files.write(getFileNames(path, language), content.toString());
+        Files.write(getFileNames(pathTo, fileNameTo, language), content.toString());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
 
         boolean contains = false;
         for (String specialCharacter : specialCharacters) {
-            if (text.contains(specialCharacter) ) {
+            if (text.contains(specialCharacter)) {
                 contains = true;
                 break;
             }
@@ -43,8 +43,8 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
         if (contains) {
             text = "<![CDATA[" + text.trim() + "]]>";
         }
-        
-        if(text.contains("'")){
+
+        if (text.contains("'")) {
             text = text.replace("'", "\\'");
         }
 
@@ -52,11 +52,11 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
     }
 
     @Override
-    public List<String> getFileNames(String path, Language language) {
+    public List<String> getFileNames(String pathTo, String fileNameTo, Language language) {
 
         List<String> fileNames = new ArrayList<String>();
 
-        String fileName = path + "/values-";
+        String fileName = pathTo + "/values-";
         if (language.toString().equalsIgnoreCase(Language.CHINESE_SIMPLIFIED.toString())) {
             fileName = fileName.concat("zh-rCN");
         } else if (language.toString().equalsIgnoreCase(Language.CHINESE_TRADITIONAL.toString())) {
@@ -65,7 +65,7 @@ public class ResourcesStringsFileGenerator implements FileGenerator {
             fileName = fileName.concat(language.toString());
         }
 
-        fileName = fileName.concat("/strings.xml");
+        fileName = fileName.concat("/" + fileNameTo);
         fileNames.add(fileName);
 
         return fileNames;

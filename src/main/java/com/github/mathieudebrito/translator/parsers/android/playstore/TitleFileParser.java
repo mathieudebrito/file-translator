@@ -7,14 +7,7 @@ import com.github.mathieudebrito.translator.utils.PlayStoreLanguage;
 public class TitleFileParser extends PlainTextFileParser {
 
     @Override
-    public String decode(String text) {
-        text = text.replace("\n", "<br />");
-        text = text.replace("<br>", "<br />");
-        return text;
-    }
-
-    @Override
-    public String getFilename(String path, Language language) {
+    public String getFilename(String path, String fileName, Language language) {
         return path + "/" + PlayStoreLanguage.getPreciseLanguage(language) + "/listing/title";
     }
 }

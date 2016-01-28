@@ -19,7 +19,7 @@ public class TitleFileGenerator extends PlainTextFileGenerator {
     }
 
     @Override
-    public List<String> getFileNames(String path, Language languageTo) {
+    public List<String> getFileNames(String path, String fileNameTo, Language languageTo) {
         List<String> languages = new ArrayList<String>();
 
         for (String language : PlayStoreLanguage.getPreciseLanguages(languageTo)) {

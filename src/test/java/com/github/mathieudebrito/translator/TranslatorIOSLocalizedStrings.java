@@ -19,7 +19,10 @@ public class TranslatorIOSLocalizedStrings {
         config.languageFrom = Language.ENGLISH;
         config.languageTo = Language.getAppleStoreCompliantLanguages();
         config.files = new ArrayList<FileToTranslate>();
-        config.files.add(new FileToTranslate(root, new IOSLocalizedStringsFileParser(), new IOSLocalizedStringsFileGenerator()));
+        config.files.add(new FileToTranslate.Builder()
+                .path(root)
+                .parser(new IOSLocalizedStringsFileParser())
+                .generator(new IOSLocalizedStringsFileGenerator()).build());
 
         Translator translator = new TranslatorGoogle();
         translator.init(config);

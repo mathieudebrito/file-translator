@@ -3,6 +3,7 @@ package com.github.mathieudebrito.translator;
 import com.github.mathieudebrito.translator.payloads.TranslationPayload;
 import com.github.mathieudebrito.translator.payloads.TranslationTextPayload;
 import com.github.mathieudebrito.translator.utils.HTMLEntities;
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -26,20 +27,33 @@ public class TranslatorGoogle implements Translator {
     @Override
     public void translate() {
         if (config == null) {
-            System.out.println("[ERROR] Config parameter is null");
+            System.out.println("[ERROR] Config parameter is very null");
         }
 
-        // Translate all files given
+        translateFileByFile();
+    }
+
+    public void translateFileByFile() {
+
+        // Translate all given files
         for (FileToTranslate file : config.files) {
 
             // Get the entries of the current file
-            Map<String, String> entries = file.parser.readEntries(file.path, config.languageFrom);
-            Map<String, String> entriesDecoded = file.parser.readEntries(file.path, config.languageFrom);
+            Map<String, String> entries = file.parser.readEntries(file.pathFrom, file.fileNamesFrom, config.languageFrom);
+            Map<String, String> entriesDecoded = file.parser.readEntries(file.pathFrom, file.fileNamesFrom, config.languageFrom);
+
+            // Exclude specified entries
+            Map<String, String> entriesToExclude = file.parser.readEntries(file.pathFrom, file.fileNameOfEntriesToExclude, config.languageFrom);
+            for (String key : entriesToExclude.keySet()) {
+                entries.remove(key);
+                entriesDecoded.remove(key);
+            }
 
             // Decode all values
             for (String key : entriesDecoded.keySet()) {
                 String value = entriesDecoded.get(key);
                 entriesDecoded.put(key, file.parser.decode(value));
+                System.out.println(key + " = " + file.parser.decode(value));
             }
 
             System.out.println("Found " + entriesDecoded.size() + " entries from " + config.languageFrom);
@@ -48,6 +62,13 @@ public class TranslatorGoogle implements Translator {
             for (Language languageTo : config.languageTo) {
                 System.out.print("Translation in " + languageTo.toString());
 
+                // Do not translate languages that have been explicitly excluded
+                if (config.excludes.contains(languageTo)) {
+                    System.out.println(" : Skipped");
+                    continue;
+                }
+
+                // Translate all values
                 Map<String, String> translations = entries;
                 if (!languageTo.equals(config.languageFrom)) {
                     translations = translateViaGoogle(entriesDecoded, languageTo);
@@ -59,7 +80,7 @@ public class TranslatorGoogle implements Translator {
                     translations.put(key, file.generator.encode(value));
                 }
 
-                file.generator.writeEntries(file.pathTranslated, languageTo, translations);
+                file.generator.writeEntries(file.pathTo, file.fileNameTo, languageTo, translations);
 
                 System.out.println(" : Done");
             }
@@ -69,6 +90,10 @@ public class TranslatorGoogle implements Translator {
     public Map<String, String> translateViaGoogle(Map<String, String> entries, Language to) {
         try {
             OkHttpClient client = new OkHttpClient();
+
+            if (Strings.isNullOrEmpty(config.key)) {
+                throw new RuntimeException("[TranslatorGoogle] translateViaGoogle - Google API key must not be null");
+            }
 
             StringBuilder url = new StringBuilder(URL_TRANSLATE);
             url = url.append("?key=" + config.key);

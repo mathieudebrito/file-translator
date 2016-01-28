@@ -1,7 +1,7 @@
 package com.github.mathieudebrito.translator.parsers.android;
 
-import com.github.mathieudebrito.translator.parsers.FileParser;
 import com.github.mathieudebrito.translator.Language;
+import com.github.mathieudebrito.translator.parsers.FileParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -13,24 +13,28 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ResourcesStringsFileParser implements FileParser {
 
-    public static final boolean LOG_ENABLED = true;
-
     @Override
-    public Map<String, String> readEntries(String path, Language languageFrom) {
+    public Map<String, String> readEntries(String path, List<String> fileNamesFrom, Language languageFrom) {
+
+        Map<String, String> entries = new TreeMap<String, String>();
+        for (String fileName : fileNamesFrom) {
+            entries.putAll(readEntries(path, fileName, languageFrom));
+        }
+        return entries;
+    }
+
+    private Map<String, String> readEntries(String path, String fileNameFrom, Language languageFrom) {
 
         Map<String, String> entries = new TreeMap<String, String>();
         try {
 
-            //String fileContent = Files.read(getFileNames(path));
-
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(getFilename(path, languageFrom));
+            Document doc = db.parse(getFilename(path, fileNameFrom, languageFrom));
             doc.getDocumentElement().normalize();
 
             NodeList strings = doc.getElementsByTagName("string");
@@ -50,10 +54,6 @@ public class ResourcesStringsFileParser implements FileParser {
                         value = entry.getChildNodes().item(0).getNodeValue();
                     }
 
-                    if (LOG_ENABLED) {
-                        System.out.println(key + " = " + decode(value));
-                    }
-
                     entries.put(key, value);
                 }
             }
@@ -61,7 +61,7 @@ public class ResourcesStringsFileParser implements FileParser {
         } catch (Exception e) {
             e.printStackTrace();
 
-            System.out.println("[ERROR] file may not be found : " + getFilename(path, languageFrom));
+            System.out.println("[ERROR] file may not be found : " + getFilename(path, fileNameFrom, languageFrom));
             return null;
         }
 
@@ -70,8 +70,8 @@ public class ResourcesStringsFileParser implements FileParser {
 
     @Override
     public String decode(String text) {
-        
-        
+
+
         text = text.replace("\\'", "'");
         text = text.replace("]]>", "");
         text = text.replace("<![CDATA[", "");
@@ -80,7 +80,7 @@ public class ResourcesStringsFileParser implements FileParser {
     }
 
     @Override
-    public String getFilename(String path, Language language) {
-        return path + "/values/strings.xml";
+    public String getFilename(String path, String fileNameFrom, Language language) {
+        return path + "/values/" + fileNameFrom;
     }
 }

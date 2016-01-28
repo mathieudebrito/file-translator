@@ -7,6 +7,7 @@ import com.google.common.base.Strings;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,7 +16,16 @@ public class IOSLocalizedStringsFileParser implements FileParser {
     public static final boolean LOG_ENABLED = true;
 
     @Override
-    public Map<String, String> readEntries(String path, Language languageFrom) {
+    public Map<String, String> readEntries(String path, List<String> fileNamesFrom, Language languageFrom) {
+
+        Map<String, String> entries = new TreeMap<String, String>();
+        for (String fileName : fileNamesFrom) {
+            entries.putAll(readEntries(path, fileName, languageFrom));
+        }
+        return entries;
+    }
+
+    private Map<String, String> readEntries(String path, String fileNameFrom, Language languageFrom) {
 
         Map<String, String> entries = new TreeMap<String, String>();
 
@@ -25,7 +35,7 @@ public class IOSLocalizedStringsFileParser implements FileParser {
             StringBuilder sb = new StringBuilder();
             try {
 
-                File file = new File(getFilename(path, languageFrom));
+                File file = new File(getFilename(path, fileNameFrom, languageFrom));
                 br = new BufferedReader(new FileReader(file));
                 String line = br.readLine();
                 while (line != null) {
@@ -65,7 +75,7 @@ public class IOSLocalizedStringsFileParser implements FileParser {
         } catch (Exception e) {
             e.printStackTrace();
 
-            System.out.println("[ERROR] file may not be found : " + getFilename(path, languageFrom));
+            System.out.println("[ERROR] file may not be found : " + getFilename(path, fileNameFrom, languageFrom));
             return null;
         }
 
@@ -79,7 +89,7 @@ public class IOSLocalizedStringsFileParser implements FileParser {
     }
 
     @Override
-    public String getFilename(String path, Language language) {
+    public String getFilename(String path, String fileNameFrom, Language language) {
         return path + "/Base.lproj/Localizable.strings";
     }
 }

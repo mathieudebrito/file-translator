@@ -40,6 +40,7 @@ public class Files {
 
     public static void write(List<String> fileNames, String content) {
         for (String fileName : fileNames) {
+            System.out.println("Writing to file : " + fileName);
             write(fileName, content);
         }
     }

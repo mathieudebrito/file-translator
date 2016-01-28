@@ -7,14 +7,7 @@ import com.github.mathieudebrito.translator.Language;
 public class ShortDescriptionFileParser extends PlainTextFileParser {
 
     @Override
-    public String decode(String text) {
-        text = text.replace("\n", "<br />");
-        text = text.replace("<br>", "<br />");
-        return text;
-    }
-
-    @Override
-    public String getFilename(String path, Language language) {
+    public String getFilename(String path, String fileName, Language language) {
         return path + "/" + PlayStoreLanguage.getPreciseLanguage(language) + "/listing/shortdescription";
     }
 }

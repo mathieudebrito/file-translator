@@ -13,7 +13,7 @@ public class IOSLocalizedStringsFileGenerator implements FileGenerator {
     public static String[] specialCharacters = new String[]{"'", "\"", "<", ">"};
 
     @Override
-    public void writeEntries(String path, Language language, Map<String, String> translations) {
+    public void writeEntries(String path, String fileNameTo, Language language, Map<String, String> translations) {
 
         StringBuilder content = new StringBuilder();
 
@@ -22,7 +22,7 @@ public class IOSLocalizedStringsFileGenerator implements FileGenerator {
             content = content.append("\"" + key + "\" = \"" + value + "\";" + Files.BR);
         }
 
-        Files.write(getFileNames(path, language), content.toString());
+        Files.write(getFileNames(path, fileNameTo, language), content.toString());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class IOSLocalizedStringsFileGenerator implements FileGenerator {
     }
 
     @Override
-    public List<String> getFileNames(String path, Language language) {
+    public List<String> getFileNames(String path, String fileNameTo, Language language) {
 
         List<String> fileNames = new ArrayList<String>();
 

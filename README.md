@@ -43,18 +43,20 @@ public class TranslateValues {
 
     public static void main(String[] args) {
 
-        String root = "/path-to-your-app/app/src/main/res";
-
         Translator.Config config = new Translator.Config();
         config.key = GOOGLE_API_KEY;
-        config.from = Language.ENGLISH;
-        config.languageTo = Language.toList(Language.FRENCH);
-        config.files = new ArrayList<>();
-        config.files.add(new FileToTranslate(root, new FileParserAndroidStrings(), new FileGeneratorAndroidStrings()));
-
+        config.languageFrom = Language.ENGLISH;
+        config.languageTo = Language.toList(Language.FRENCH, Language.ESTONIAN);
+        config.excludes = Language.toList(Language.ESTONIAN);
+        config.files.add(new FileToTranslate.Builder()
+                .path(root).from("strings.xml").to("strings.xml")
+                .fileNameOfEntriesToExclude("strings_translated.xml")
+                .parser(new ResourcesStringsFileParser())
+                .generator(new ResourcesStringsFileGenerator())
+                .build());
         Translator translator = new TranslatorGoogle();
         translator.init(config);
-
+        
         translator.translate();
     }
 }

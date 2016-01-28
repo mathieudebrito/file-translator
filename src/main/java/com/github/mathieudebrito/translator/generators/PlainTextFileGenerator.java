@@ -8,7 +8,7 @@ import java.util.Map;
 public abstract class PlainTextFileGenerator implements FileGenerator {
 
     @Override
-    public void writeEntries(String path, Language language, Map<String, String> translations) {
+    public void writeEntries(String path, String fileName, Language language, Map<String, String> translations) {
 
         StringBuilder content = new StringBuilder();
 
@@ -17,7 +17,7 @@ public abstract class PlainTextFileGenerator implements FileGenerator {
             content = content.append(value);
         }
 
-        Files.write(getFileNames(path, language), content.toString());
+        Files.write(getFileNames(path, fileName, language), content.toString());
     }
 
     @Override
