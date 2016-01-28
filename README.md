@@ -21,7 +21,7 @@ File-Translator helps you translate your Android app using Google Translate.
 
 Add this line to your module dependencies
 ```gradle
-    compile 'com.github.mathieudebrito:file-translator:1.0.+'
+    compile 'com.github.mathieudebrito:file-translator:2.0.+'
 ```
 
 ##### Using the .jar #####
